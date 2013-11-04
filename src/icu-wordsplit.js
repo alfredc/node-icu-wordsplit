@@ -1,4 +1,3 @@
-
 // node-icu-wordsplit.js - Main JS entrypoint for the module
 //   Needed this because somehow the node native module build system
 //   doesn't like dashes in the module name and I don't know how
@@ -8,7 +7,7 @@
   var splitWords = require('../lib/wordsplit.node').splitWords;
 
   // TODO: Use ICU data for better rejecting useless parts?
-  var REJECT = /^[ \.\!\?\:\;\r\n]*$/;
+  //var REJECT = /^[ \.\!\?\:\;\r\n]*$/;
 
   // adds precondition checks (easier to do via JS)
   module.exports = (function(split) {
@@ -29,18 +28,18 @@
       text = "" + text;
 
       // should be safe to venture into C land by now
-      var rawResults = split(locale, text) || []
-        , results = [];
+      var rawResults = split(locale, text) || [];
+        //, results = [];
 
       // filter out common chars and empty entries
       // TODO: Trim from C land? Since we have better ICU support there.
-      for (var i = 0; i < rawResults.length; i++) {
-        if (rawResults[i].match(REJECT)) continue;
+      //for (var i = 0; i < rawResults.length; i++) {
+        //if (rawResults[i].match(REJECT)) continue;
 
-        results.push(rawResults[i]);
-      }
+        //results.push(rawResults[i]);
+      //}
 
-      return results;
+      return rawResults;
 
     };
   })(splitWords);
